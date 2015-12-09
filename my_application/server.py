@@ -51,7 +51,8 @@ def post_queues():
     queue_name = body['name']
  
     q = conn.create_queue (queue_name)
-    resp = json.dumps(q.name)
+    x = q.name + " queue created "
+    resp = json.dumps(x)
     return Response(response=resp, mimetype="application/json")
 
 @app.route('/queues/<qid>', methods=['DELETE'])
@@ -64,8 +65,8 @@ def delete_queues(qid):
     conn = get_conn()
     q = conn.get_queue(qid)
     conn.delete_queue (q)
-    
-    resp = json.dumps(q.name)
+    x = q.name + " queue deleted "
+    resp = json.dumps(x)
     return Response(response=resp, mimetype="application/json")
 
 @app.route('/queues/<qid>/msgs', methods=['GET'])
